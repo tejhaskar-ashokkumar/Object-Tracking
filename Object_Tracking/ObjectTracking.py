@@ -1,11 +1,12 @@
+'''File: Object Tracking
+Name: Tejhaskar'''
+
 import cv2
 import sys
  
 
 if __name__ == '__main__' :
  
-    # Set up tracker.
-    # Instead of MIL, you can also use
  
     tracker_types = ['BOOSTING', 'MIL','KCF', 'TLD', 'MEDIANFLOW', 'CSRT', 'MOSSE']
     tracker_type = input("Enter a tracker type: ")
@@ -26,32 +27,30 @@ if __name__ == '__main__' :
     if tracker_type == 'MOSSE':
         tracker = cv2.TrackerMOSSE_create()
  
-    # Read video
     video = cv2.VideoCapture("./videos/hurdles.mp4")
  
-    # Exit if video not opened.
     if not video.isOpened():
         print("Error opening the video file")
         sys.exit()
  
-    # Read first frame.
+    
     success, frame = video.read()
     if not success:
         print('Error reading the video file')
         sys.exit()
      
-    # Define an initial bounding box
+    
     bounding_box = None
 
  
-    # Uncomment the line below to select a different bounding box
+    
     bounding_box = cv2.selectROI(frame, fromCenter = False, showCrosshair = True)
  
     # Initialize tracker with first frame and bounding box
     success = tracker.init(frame, bounding_box)
  
     while True:
-        # Read a new frame
+        
         success, frame = video.read()
         if not success:
             break
